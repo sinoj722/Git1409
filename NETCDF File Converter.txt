@@ -1,0 +1,27 @@
+import xarray as xr
+import pandas as pd
+import numpy as np
+import glob
+
+#open netcdf in xarray,then convert to pandas dataframe
+
+def NCtoCSV(infile_str):
+    ds = xr.open_dataset(infile_str)
+    df = ds.to_dataframe()
+    
+    #display(df)
+    
+    #save file with same name,different extension
+    
+    df.to_csv(infile_str[:-3]+'.csv')
+    #np.savetxt(infile_str[:-3]+'.txt',df.values,fmt='%s')
+    
+    return('File : '+infile_str+' Successfully converted as text')
+
+#list all nc files in directory
+
+list_of_nc = glob.glob(r'C:\Users\Revathy.s03\Desktop\*.nc')
+
+#list comprehension to run the function over all nc files in the directory
+
+[NCtoCSV(file) for file in list_of_nc]
