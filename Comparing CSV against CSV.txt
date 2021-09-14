@@ -1,0 +1,52 @@
+#Comparing_CSV_against_CSV.py
+import csv
+import io
+from datetime import datetime
+a=datetime.now()
+print(a)
+CSV1 = input("CSV1 path: ")
+CSV2 = input("CSV2 path: ")
+A = io.open(CSV1,'r',encoding='utf-8-sig')
+B = open(CSV2 ,'r')
+A1 = A.readlines()
+B1 = B.readlines()
+A.close()
+B.close()
+#Count Validation
+L1=len(A1)-1
+L2=len(B1)-1
+print ('Source count', L1)
+print ('Target count', L2)
+print ('count difference',(L1-L2))
+
+#Data Validation
+#Source minus Target
+SMT1 = input("sourceminustarget path: ")
+sourceminustarget = open(SMT1,'w')
+sourceminustarget.write(A1[0])
+D = set(A1) -set(B1)
+#print('Data Mismatch Records in source',D)
+for i in D:
+    sourceminustarget.write(i)
+sourceminustarget.close()
+C = open(SMT1,'r')
+C1 = C.readlines()
+L3=len(C1)-1
+print('Count of Data Mismatch Records in source',L3)
+sourceminustarget.close()
+#Target minus Source
+TMS1 = input("Targetminussource path: ")
+Targetminussource = open(TMS1,'w')
+Targetminussource.write(B1[0])
+D1 = set(B1) - set(A1)
+#print ('Data Mismatch Records in Target',D1)
+for j in D1:
+    Targetminussource.write(j)
+Targetminussource.close()
+C1 = open('C:\\Users\\Revathy.s03\\Targetminussource.csv','r')
+C11 = C1.readlines()
+L31=len(C11)-1
+print('Count of Data Mismatch Records in Target',L31)
+Targetminussource.close()
+
+
